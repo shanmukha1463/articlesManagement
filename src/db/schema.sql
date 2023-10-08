@@ -1,0 +1,27 @@
+CREATE TABLE IF NOT EXISTS roles (
+  id TEXT PRIMARY KEY,
+  rolename TEXT NOT NULL UNIQUE DEFAULT ''
+);
+
+CREATE TABLE IF NOT EXISTS role_permissions (
+  id TEXT PRIMARY KEY,
+  role_id TEXT NOT NULL,
+  access TEXT NOT NULL DEFAULT 'read',
+  FOREIGN KEY (role_id) REFERENCES roles (id)
+);
+
+CREATE TABLE IF NOT EXISTS users (
+  id TEXT PRIMARY KEY,
+  username TEXT NOT NULL UNIQUE DEFAULT '',
+  role_id TEXT NOT NULL,
+  FOREIGN KEY (role_id) REFERENCES roles (id)
+);
+
+CREATE TABLE IF NOT EXISTS articles (
+  id TEXT PRIMARY KEY,
+  title TEXT NOT NULL DEFAULT '',
+  content TEXT NOT NULL,
+  author_id TEXT NOT NULL,
+  is_drafted BOOLEAN NOT NULL DEFAULT FALSE,
+  FOREIGN KEY (author_id) REFERENCES users (id)
+);
