@@ -1,7 +1,7 @@
 const sqlite3 = require("sqlite3").verbose();
 const fs = require("fs/promises");
 
-const db = new sqlite3.Database("./database.db", (err) => {
+const db = new sqlite3.Database("./src/db/database.db", (err) => {
   if (err) {
     return console.error(err.message);
   }
@@ -82,4 +82,4 @@ const createDatabase = async () => {
   }
 };
 
-module.exports = { db, executeQuery, dropDatabase, createDatabase};
+module.exports = { db, executeQuery, dropDatabase, createDatabase };
